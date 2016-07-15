@@ -1,0 +1,14 @@
+DESCRIPTION.rst
+MANIFEST.in
+README.md
+RELEASE-VERSION
+setup.cfg
+setup.py
+version.py
+mettler_toledo_device/__init__.py
+mettler_toledo_device/mettler_toledo_device.py
+mettler_toledo_device.egg-info/PKG-INFO
+mettler_toledo_device.egg-info/SOURCES.txt
+mettler_toledo_device.egg-info/dependency_links.txt
+mettler_toledo_device.egg-info/requires.txt
+mettler_toledo_device.egg-info/top_level.txt

@@ -14,14 +14,15 @@ from PIL import Image
 #Setup Mettler Toledo Scale
 from mettler_toledo_device import MettlerToledoDevice
 
+
 prior_image = None
 
 def setup_scale():
     dev = MettlerToledoDevice() # Might automatically find device if one available
     # if it is not found automatically, specify port directly
     dev = MettlerToledoDevice(port='/dev/ttyUSB0') # Linux specific port
-    #dev = MettlerToledoDevice(port='/dev/tty.usbmodem262471') # Mac OS X specific port
-    #dev = MettlerToledoDevice(port='COM3') # Windows specific port
+    dev = MettlerToledoDevice(port='/dev/tty.usbmodem262471') # Mac OS X specific port
+    dev = MettlerToledoDevice(port='COM3') # Windows specific port
     dev.get_serial_number()
     #1126493049
     dev.get_balance_data()
@@ -57,9 +58,6 @@ def detect_motion(camera):
         # Once motion detection is done, make the prior image the current
         prior_image = current_image
         return result
-
-def detect_weight_change():
-
 
 def write_video(stream):
     # Write the entire content of the circular buffer to disk. No need to
