@@ -61,6 +61,13 @@ dev = devs[0]
 
 [Setup Python](https://github.com/janelia-pypi/python_setup)
 
+## Dont install homebrew AND python
+## sudo easy_install pip
+## sudo easy_install virtualenvs
+## sudo easy_install ipython
+
+## sudo pip install pyserial
+
 ###Linux and Mac OS X
 
 ```shell
