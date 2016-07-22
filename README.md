@@ -5,11 +5,13 @@ This project will help monitor the flow rate of urine on mice and record video
 
 From link below do the following:
 [Setup Python](https://github.com/janelia-pypi/python_setup)
-## Dont install homebrew OR python -- macOS 10.11 already has python in it
-## sudo easy_install pip
-## sudo easy_install virtualenvs
-## sudo easy_install ipython
-## sudo pip install pyserial
+```shell
+Dont install homebrew OR python -- macOS 10.11 already has python in it
+sudo easy_install pip
+sudo easy_install virtualenvs
+sudo easy_install ipython
+sudo pip install pyserial
+```
 
 ###Linux and Mac OS X
 
