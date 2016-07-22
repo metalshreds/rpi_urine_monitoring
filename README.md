@@ -19,3 +19,13 @@ virtualenv ~/virtualenvs/mettler_toledo_device
 source ~/virtualenvs/mettler_toledo_device/bin/activate
 pip install mettler_toledo_device  ## Be sure this installs successfully
 ```
+
+/Library/Python/2.7/site-packages/serial-device2
+
+Amit's Pi -- 10.141.247.122
+
+Bring USB-B to USB-A
+
+------
+--> c++ for mettler toledo
+--> 
