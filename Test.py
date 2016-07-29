@@ -11,3 +11,5 @@ with picamera.PiCamera() as camera:
     camera.start_recording('my_video.h264')
     camera.wait_recording(2)
     camera.stop_recording()
+
+print(weightdata,timedata)
