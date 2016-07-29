@@ -14,7 +14,7 @@ weightdata = ser.readline()
 timedata = strftime("%Y-%m-%d %H:%M:%S", gmtime())
 print(weightdata,timedata)
 
-# camera = picamera.PiCamera(resolution=(1280, 720), framerate=24)
+camera = picamera.PiCamera(resolution=(1280, 720), framerate=24)
 camera.start_preview()
 camera.annotate_background = picamera.Color('black')
 camera.annotate_text = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
