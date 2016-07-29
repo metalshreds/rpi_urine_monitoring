@@ -11,54 +11,60 @@ import io
 import random
 import picamera
 from PIL import Image
+import serial
 #Setup Mettler Toledo Scale
-from mettler_toledo_device import MettlerToledoDevice
+# from mettler_toledo_device import MettlerToledoDevice
 
-prior_image = None
+ser = serial.Serial('/dev/ttyACM0', 9600)
 
-def setup_scale():
-    dev = MettlerToledoDevice() # Might automatically find device if one available
-    # if it is not found automatically, specify port directly
-    dev = MettlerToledoDevice(port='/dev/ttyUSB0') # Linux specific port
-        #dev = MettlerToledoDevice(port='/dev/tty.usbmodem262471') # Mac OS X specific port
-        #dev = MettlerToledoDevice(port='COM3') # Windows specific port
-    dev.get_serial_number()
-        #1126493049
-    dev.get_balance_data()
-        #['XS204', 'Excellence', '220.0090', 'g']
-    dev.get_weight_stable()
-        #[-0.0082, 'g'] #if weight is stable
-        #None  #if weight is dynamic
-    dev.get_weight()
-        #[-0.6800, 'g', 'S'] #if weight is stable
-        #[-0.6800, 'g', 'D'] #if weight is dynamic
-    dev.zero_stable()
-        #True  #zeros if weight is stable
-        #False  #does not zero if weight is not stable
-    dev.zero()
-        #'S'   #zeros if weight is stable
-        #'D'   #zeros if weight is dynamic
+# prior_image = None
+
+# def setup_scale():
+#     dev = MettlerToledoDevice() # Might automatically find device if one available
+#     # if it is not found automatically, specify port directly
+#     dev = MettlerToledoDevice(port='/dev/ttyUSB0') # Linux specific port
+#         #dev = MettlerToledoDevice(port='/dev/tty.usbmodem262471') # Mac OS X specific port
+#         #dev = MettlerToledoDevice(port='COM3') # Windows specific port
+#     dev.get_serial_number()
+#         #1126493049
+#     dev.get_balance_data()
+#         #['XS204', 'Excellence', '220.0090', 'g']
+#     dev.get_weight_stable()
+#         #[-0.0082, 'g'] #if weight is stable
+#         #None  #if weight is dynamic
+#     dev.get_weight()
+#         #[-0.6800, 'g', 'S'] #if weight is stable
+#         #[-0.6800, 'g', 'D'] #if weight is dynamic
+#     dev.zero_stable()
+#         #True  #zeros if weight is stable
+#         #False  #does not zero if weight is not stable
+#     dev.zero()
+#         #'S'   #zeros if weight is stable
+#         #'D'   #zeros if weight is dynamic
 
 
 
 def detect_motion(camera):
-    global prior_image
-    stream = io.BytesIO()
-    camera.capture(stream, format='jpeg', use_video_port=True)
-    stream.seek(0)
-    if prior_image is None:
-        prior_image = Image.open(stream)
-        return False
-    else:
-        current_image = Image.open(stream)
-        # Compare current_image to prior_image to detect motion. This is
-        # left as an exercise for the reader!
-        result = random.randint(0, 10) == 0
-        # Once motion detection is done, make the prior image the current
-        prior_image = current_image
-        return result
+#     global prior_image
+#     stream = io.BytesIO()
+#     camera.capture(stream, format='jpeg', use_video_port=True)
+#     stream.seek(0)
+#     if prior_image is None:
+#         prior_image = Image.open(stream)
+#         return False
+#     else:
+#         current_image = Image.open(stream)
+#         # Compare current_image to prior_image to detect motion. This is
+#         # left as an exercise for the reader!
+#
+#
+#         result = random.randint(0, 10) == 0
+#         # Once motion detection is done, make the prior image the current
+#         prior_image = current_image
+#         return result
 
-#def detect_weight_change():
+def detect_weight_change():
+    weight1 = ser.readline();
 
 
 def write_video(stream):
@@ -86,7 +92,7 @@ with picamera.PiCamera() as camera:
     try:
         while True:
             camera.wait_recording(1)
-            if detect_motion(camera):
+            if detect_weight_change():
                 print('Motion detected!')
                 # As soon as we detect motion, split the recording to
                 # record the frames "after" motion
