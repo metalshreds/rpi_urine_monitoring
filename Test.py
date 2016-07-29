@@ -8,7 +8,7 @@ weightdata = ser.readline()
 timedata = strftime("%Y-%m-%d %H:%M:%S", gmtime())
 
 with picamera.PiCamera() as camera:
-    camera.resolution = (640, 480)
+ #   camera.resolution = (640, 480)
 
     weightdata = ser.readline()
     timedata = strftime("%Y-%m-%d %H:%M:%S", gmtime())
