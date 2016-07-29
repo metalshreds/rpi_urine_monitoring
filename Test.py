@@ -13,7 +13,7 @@ with picamera.PiCamera() as camera:
     print(weightdata,timedata)
     camera.start_recording('my_video.h264')
 
-    camera.wait_recording(20)
+    camera.wait_recording(60)
     camera.stop_recording()
     weightdata = ser.readline()
     timedata = strftime("%Y-%m-%d %H:%M:%S", gmtime())
