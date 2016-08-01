@@ -29,7 +29,7 @@ while (dt.datetime.now() - start).seconds < 30:
     timestamp = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     camera.annotate_text = timestamp
     camera.wait_recording(0.2)
-    writer.writerow(timestamp)
+    writer.writerow(([timestamp])
 camera.stop_recording()
 
 # camera.start_recording('my_video.h264')
