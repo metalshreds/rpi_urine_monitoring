@@ -7,6 +7,10 @@ ser = serial.Serial('/dev/ttyACM0',9600)
 weightdata = ser.readline()
 timedata = strftime("%Y-%m-%d %H:%M:%S", gmtime())
 
+file = open('timedata.csv','a') as csvfile
+writer = csv.writer(csvfile)
+
+
 # with picamera.PiCamera() as camera:
 #   camera.resolution = (640, 480)
 
@@ -21,8 +25,10 @@ camera.annotate_text = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 camera.start_recording('timestamped.h264')
 start = dt.datetime.now()
 while (dt.datetime.now() - start).seconds < 30:
-    camera.annotate_text = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    timestamp = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    camera.annotate_text = timestamp
     camera.wait_recording(0.2)
+    write.writerow(timetamp)
 camera.stop_recording()
 
 # camera.start_recording('my_video.h264')
@@ -33,4 +39,5 @@ weightdata = ser.readline()
 timedata = strftime("%Y-%m-%d %H:%M:%S", gmtime())
 print(weightdata,timedata)
 
+file.close()
 
