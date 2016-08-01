@@ -7,8 +7,8 @@ ser = serial.Serial('/dev/ttyACM0',9600)
 weightdata = ser.readline()
 timedata = strftime("%Y-%m-%d %H:%M:%S", gmtime())
 
-file = open('timedata.csv','a') as csvfile
-writer = csv.writer(csvfile)
+file = open('timedata.csv','a')
+writer = csv.writer(file)
 
 
 # with picamera.PiCamera() as camera:
