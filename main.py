@@ -15,6 +15,20 @@ import serial
 #Setup Mettler Toledo Scale
 # from mettler_toledo_device import MettlerToledoDevice
 
+#TODO
+# while - key not pressed or script stopped
+#       - Circular buffer
+# def - weight_measurements() <-- check continuously
+#       - Weight comparison - percent error
+#       - Record (xlsx)- timestamps and weight in excel sheet
+#***EVENT DETECTED
+# def - write_video() event detected - write circular buffer
+#       - capture video with timestamp percent fluctuation
+#       - How many seconds previous to the event?
+#
+#       view camera remotely
+#       start/stop script remotely
+
 ser = serial.Serial('/dev/ttyACM0', 9600)
 
 # prior_image = None
@@ -44,7 +58,7 @@ ser = serial.Serial('/dev/ttyACM0', 9600)
 
 
 
-def detect_motion(camera):
+# def detect_motion(camera):
 #     global prior_image
 #     stream = io.BytesIO()
 #     camera.capture(stream, format='jpeg', use_video_port=True)
