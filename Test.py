@@ -2,6 +2,7 @@ import serial
 from time import gmtime, strftime
 import picamera
 import datetime as dt
+import csv
 
 ser = serial.Serial('/dev/ttyACM0',9600)
 weightdata = ser.readline()
