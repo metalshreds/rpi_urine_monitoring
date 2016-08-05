@@ -77,8 +77,6 @@ ser = serial.Serial('/dev/ttyACM0', 9600)
 #         prior_image = current_image
 #         return result
 
-def detect_weight_change():
-    weight1 = ser.readline();
 
 
 def write_video(stream):
@@ -106,7 +104,7 @@ with picamera.PiCamera() as camera:
     try:
         while True:
             camera.wait_recording(1)
-            if detect_weight_change():
+            if detect_motion(camera):
                 print('Motion detected!')
                 # As soon as we detect motion, split the recording to
                 # record the frames "after" motion
