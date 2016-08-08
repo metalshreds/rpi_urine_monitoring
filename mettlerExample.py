@@ -1,7 +1,7 @@
 from mettler_toledo_device import MettlerToledoDevice
 dev = MettlerToledoDevice() # Might automatically find device if one available
 # if it is not found automatically, specify port directly
-dev = MettlerToledoDevice(port='/dev/ttyUSB0') # Linux specific port
+dev = MettlerToledoDevice(port='/dev/ttyACM0') # Linux specific port
 #dev = MettlerToledoDevice(port='/dev/tty.usbmodem262471') # Mac OS X specific port
 #dev = MettlerToledoDevice(port='COM3') # Windows specific port
 dev.get_serial_number()
