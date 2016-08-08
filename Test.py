@@ -32,7 +32,7 @@ camera.annotate_background = picamera.Color('black')
 camera.annotate_text = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 camera.start_recording('timestamped.h264')
 start = dt.datetime.now()
-while (dt.datetime.now() - start).seconds < 5:
+while (dt.datetime.now() - start).seconds < 15:
     timestamp = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     #weightdata = ser.readline()
     weightdata = dev.get_weight()
