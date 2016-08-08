@@ -18,9 +18,9 @@ print(weightdata,timedata)
 
 ### SETUP METTLER TOLEDO SCALE
 from mettler_toledo_device import MettlerToledoDevice
-dev = MettlerToledoDevice() # Might automatically find device if one available
+###dev = MettlerToledoDevice() # Might automatically find device if one available
 # if it is not found automatically, specify port directly
-dev = MettlerToledoDevice(port='/dev/ttyACM0') # Linux specific port
+###dev = MettlerToledoDevice(port='/dev/ttyACM0') # Linux specific port
 #dev = MettlerToledoDevice(port='/dev/tty.usbmodem262471') # Mac OS X specific port
 #dev = MettlerToledoDevice(port='COM3') # Windows specific port
 
@@ -56,7 +56,7 @@ while (dt.datetime.now() - start).seconds < 5:
     camera.wait_recording(0.2)
 
     #Write timestamp to file
-    writer.writerow([timestamp,weightdata])
+    writer.writerow([timestamp, weightdata])
 
 camera.stop_recording()
 
@@ -90,14 +90,22 @@ def write_video(stream):
     stream.truncate()
 
 def detect_weight(timestamp):
-    weight, units, stability = dev.get_weight()
-    writer.writerow([timestamp, weightdata])
+    ## With Mettler Toledo
+    ###weight, units, stability = dev.get_weight()
+    ###writer.writerow([timestamp, weightdata])
+
+    ## With Arduino
+    arduinoValue = ser.readline()
+    if arduinoValue == '0': #No Weight Change
+        return False
+    elif arduinoValue == '1024': #Weight Change
+        return True
+
+
+
 
 
 ############### "MAIN" METHOD
-
-#global variables
-
 
 with picamera.PiCamera(resolution=(1280, 720), framerate=24) as camera:
     stream = picamera.PiCameraCircularIO(camera, seconds=10)
@@ -107,8 +115,6 @@ with picamera.PiCamera(resolution=(1280, 720), framerate=24) as camera:
     camera.annotate_text = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     #Start Recording
     camera.start_recording('timestamped.h264')
-    ##
-
     ##
     camera.start_recording(stream, format='h264')
     try:
@@ -126,7 +132,6 @@ with picamera.PiCamera(resolution=(1280, 720), framerate=24) as camera:
                 camera.split_recording('after.h264')
                 # Write the 10 seconds "before" motion to disk as well
                 write_video(stream)
-
                 # Wait until motion is no longer detected, then split
                 # recording back to the in-memory circular buffer
                 while detect_weight(timestamp):
