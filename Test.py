@@ -4,7 +4,7 @@ import picamera
 import datetime as dt
 import csv
 from mettler_toledo_device import MettlerToledoDevice
-#dev = MettlerToledoDevice() # Might automatically find device if one available
+dev = MettlerToledoDevice() # Might automatically find device if one available
 # if it is not found automatically, specify port directly
 dev = MettlerToledoDevice(port='/dev/ttyACM0') # Linux specific port
 
