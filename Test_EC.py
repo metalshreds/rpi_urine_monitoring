@@ -91,7 +91,7 @@ def write_video(stream):
 
 def detect_weight(timestamp):
     ## With Mettler Toledo
-    ###weight, units, stability = dev.get_weight()
+    weight, units, stability = dev.get_weight()
     ###writer.writerow([timestamp, weightdata])
 
     ## With Arduino
