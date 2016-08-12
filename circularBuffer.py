@@ -3,6 +3,13 @@ import random
 import picamera
 import datetime as dt
 from time import gmtime, strftime
+import csv
+import os.path
+#from mettler_toledo_device import MettlerToledoDevice
+
+
+file = open('timedata.csv','aw')
+writer = csv.writer(file)
 
 def write_now():
     # Randomly return True (like a fake motion detection routine)
@@ -23,10 +30,16 @@ def write_video(stream):
             output.write(stream.read())
     print('Done Writing Video!')
 
+def write_file(timestamp):
+    weightData = write_now();
+    writer.writerow([timestamp, weightData])
+
 def video_timestamp(camera):
+    timestamp = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     camera.annotate_background = picamera.Color('black')
-    camera.annotate_text = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    camera.annotate_text = timestamp
     camera.wait_recording(0.2)
+    write_file(timestamp)
 
 
 ##### MAIN #####
@@ -34,13 +47,12 @@ with picamera.PiCamera(resolution=(1280, 720), framerate=24) as camera:
     stream = picamera.PiCameraCircularIO(camera, seconds=20)
     camera.start_recording(stream, format='h264')
 
-
     try:
         while True:
             #camera.wait_recording(1)
             video_timestamp(camera)
             if write_now():
-
+                print('Event Triggered')
                 # Keep recording for 10 seconds and only then write the
                 # stream to disk
                 #camera.wait_recording(10)
@@ -50,3 +62,4 @@ with picamera.PiCamera(resolution=(1280, 720), framerate=24) as camera:
                 write_video(stream)
     finally:
         camera.stop_recording()
+        file.close()
