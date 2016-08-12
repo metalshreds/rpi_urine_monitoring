@@ -6,7 +6,7 @@ from time import gmtime, strftime
 
 def write_now():
     # Randomly return True (like a fake motion detection routine)
-    return random.randint(0, 10) == 0
+    return random.randint(0, 30) == 0
 
 def write_video(stream):
     print('Writing video!')
@@ -21,7 +21,15 @@ def write_video(stream):
         fileName = file_name + '.h264'
         with io.open(fileName, 'wb') as output:
             output.write(stream.read())
+    print('Done Writing Video!')
 
+def video_timestamp(camera):
+    camera.annotate_background = picamera.Color('black')
+    camera.annotate_text = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    camera.wait_recording(0.2)
+
+
+##### MAIN #####
 with picamera.PiCamera(resolution=(1280, 720), framerate=24) as camera:
     stream = picamera.PiCameraCircularIO(camera, seconds=20)
     camera.start_recording(stream, format='h264')
@@ -30,21 +38,15 @@ with picamera.PiCamera(resolution=(1280, 720), framerate=24) as camera:
     try:
         while True:
             #camera.wait_recording(1)
-            camera.annotate_background = picamera.Color('black')
-            camera.annotate_text = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            camera.wait_recording(0.2)
+            video_timestamp(camera)
             if write_now():
 
                 # Keep recording for 10 seconds and only then write the
                 # stream to disk
                 #camera.wait_recording(10)
-                #RECORD 10 MORE SECONDS
                 start = dt.datetime.now()
                 while (dt.datetime.now() - start).seconds < 10:
-                    timestamp = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                    camera.annotate_text = timestamp
-                    camera.wait_recording(0.2)
+                    video_timestamp(camera)
                 write_video(stream)
     finally:
-        print('Done Writing Video!')
         camera.stop_recording()
