@@ -1,6 +1,8 @@
 import io
 import random
 import picamera
+import datetime as dt
+from time import gmtime, strftime
 
 def write_now():
     # Randomly return True (like a fake motion detection routine)
@@ -15,10 +17,13 @@ def write_video(stream):
                 stream.seek(frame.position)
                 break
         # Write the rest of the stream to disk
-        with io.open('motion.h264', 'wb') as output:
+        file_name = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+        with io.open(file_name, 'wb') as output:
             output.write(stream.read())
 
-with picamera.PiCamera() as camera:
+with picamera.PiCamera(resolution=(1280, 720), framerate=24) as camera:
+    camera.annotate_background = picamera.Color('black')
+    camera.annotate_text = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     stream = picamera.PiCameraCircularIO(camera, seconds=20)
     camera.start_recording(stream, format='h264')
     try:
