@@ -60,7 +60,6 @@ with picamera.PiCamera(resolution=(1280, 720), framerate=24) as camera:
                 while (dt.datetime.now() - start).seconds < 10:
                     video_timestamp(camera)
                 write_video(stream)
-                camera.stop_recording()
     finally:
         print('stop_recording')
         camera.stop_recording()
