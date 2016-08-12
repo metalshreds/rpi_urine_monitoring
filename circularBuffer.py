@@ -41,30 +41,27 @@ def video_timestamp(camera):
     write_file(timestamp)
 
 
-    ##### MAIN #####
-def start_recording():
-    with picamera.PiCamera(resolution=(1280, 720), framerate=24) as camera:
-        stream = picamera.PiCameraCircularIO(camera, seconds=20)
-        camera.start_recording(stream, format='h264')
-        print('returning')
-        return camera, stream
+##### MAIN #####
+with picamera.PiCamera(resolution=(1280, 720), framerate=24) as camera:
+    stream = picamera.PiCameraCircularIO(camera, seconds=20)
+    camera.start_recording(stream, format='h264')
 
-try:
-    print('starting recording')
-    camera, stream = start_recording()
-    print('recording started')
-    while True:
-        #camera.wait_recording(1)
-        video_timestamp(camera)
-        if write_now():
-            print('Event Triggered')
-            # Keep recording for 10 seconds and only then write the
-            # stream to disk
-            #camera.wait_recording(10)
-            start = dt.datetime.now()
-            while (dt.datetime.now() - start).seconds < 10:
-                video_timestamp(camera)
-            write_video(stream)
-finally:
-    camera.stop_recording()
-    file.close()
+    try:
+
+        while True:
+            #camera.wait_recording(1)
+            video_timestamp(camera)
+            if write_now():
+                print('Event Triggered')
+                # Keep recording for 10 seconds and only then write the
+                # stream to disk
+                #camera.wait_recording(10)
+                start = dt.datetime.now()
+                while (dt.datetime.now() - start).seconds < 10:
+                    video_timestamp(camera)
+                write_video(stream)
+                camera.stop_recording()
+    finally:
+        print('stop_recording')
+        camera.stop_recording()
+        file.close()
