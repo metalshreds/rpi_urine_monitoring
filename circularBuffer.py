@@ -49,6 +49,7 @@ def start_recording():
         return camera, stream
 
 try:
+    print('starting recording')
     camera, stream = start_recording()
     while True:
         #camera.wait_recording(1)
