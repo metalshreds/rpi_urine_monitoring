@@ -52,6 +52,7 @@ def start_recording():
 try:
     print('starting recording')
     camera, stream = start_recording()
+    print('recording started')
     while True:
         #camera.wait_recording(1)
         video_timestamp(camera)
