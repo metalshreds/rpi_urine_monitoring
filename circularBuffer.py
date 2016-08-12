@@ -62,9 +62,6 @@ try:
             while (dt.datetime.now() - start).seconds < 10:
                 video_timestamp(camera)
             write_video(stream)
-            camera.stop_recording()
-            #restart camera
-            camera = start_recording()
 finally:
     camera.stop_recording()
     file.close()
