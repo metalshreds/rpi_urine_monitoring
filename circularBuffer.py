@@ -18,21 +18,33 @@ def write_video(stream):
                 break
         # Write the rest of the stream to disk
         file_name = strftime("%Y-%m-%d %H:%M:%S", gmtime())
-        with io.open(file_name, 'wb') as output:
+        fileName = file_name + '.h264'
+        with io.open(fileName, 'wb') as output:
             output.write(stream.read())
 
 with picamera.PiCamera(resolution=(1280, 720), framerate=24) as camera:
-    camera.annotate_background = picamera.Color('black')
-    camera.annotate_text = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     stream = picamera.PiCameraCircularIO(camera, seconds=20)
     camera.start_recording(stream, format='h264')
+
+
     try:
         while True:
-            camera.wait_recording(1)
+            #camera.wait_recording(1)
+            camera.annotate_background = picamera.Color('black')
+            camera.annotate_text = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            camera.wait_recording(0.2)
             if write_now():
+
                 # Keep recording for 10 seconds and only then write the
                 # stream to disk
-                camera.wait_recording(10)
+                #camera.wait_recording(10)
+                #RECORD 10 MORE SECONDS
+                start = dt.datetime.now()
+                while (dt.datetime.now() - start).seconds < 10:
+                    timestamp = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                    camera.annotate_text = timestamp
+                    camera.wait_recording(0.2)
                 write_video(stream)
     finally:
+        print('Done Writing Video!')
         camera.stop_recording()
