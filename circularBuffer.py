@@ -46,6 +46,7 @@ def start_recording():
     with picamera.PiCamera(resolution=(1280, 720), framerate=24) as camera:
         stream = picamera.PiCameraCircularIO(camera, seconds=20)
         camera.start_recording(stream, format='h264')
+        print('returning')
         return camera, stream
 
 try:
