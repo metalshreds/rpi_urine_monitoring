@@ -53,13 +53,18 @@ with picamera.PiCamera(resolution=(1280, 720), framerate=24) as camera:
             video_timestamp(camera)
             if write_now():
                 print('Event Triggered')
-                # Keep recording for 10 seconds and only then write the
-                # stream to disk
+                # Keep recording for 10 seconds and only then write the stream to disk
                 #camera.wait_recording(10)
                 start = dt.datetime.now()
                 while (dt.datetime.now() - start).seconds < 10:
                     video_timestamp(camera)
                 write_video(stream)
+                #restart video
+                camera.stop_recording();
+                camera = picamera.PiCamera(resolution=(1280, 720), framerate=24)
+                stream = picamera.PiCameraCircularIO(camera, seconds=20)
+                camera.start_recording(stream, format='h264')
+
     finally:
         print('stop_recording')
         camera.stop_recording()
