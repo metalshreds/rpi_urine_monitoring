@@ -12,7 +12,7 @@ writer = csv.writer(file)
 
 def write_now():
     # Randomly return True (like a fake motion detection routine)
-    return random.randint(0, 100) == 0
+    return random.randint(0, 1000) == 0
 
 def write_video(stream):
     print('Writing video!')
@@ -37,7 +37,7 @@ def video_timestamp(camera):
     timestamp = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     camera.annotate_background = picamera.Color('black')
     camera.annotate_text = timestamp
-    camera.wait_recording(0.5)
+    camera.wait_recording(0.2)
     write_file(timestamp)
 
 
