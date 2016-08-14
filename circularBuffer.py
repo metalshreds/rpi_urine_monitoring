@@ -60,7 +60,6 @@ with picamera.PiCamera(resolution=(1280, 720), framerate=24) as camera:
                     video_timestamp(camera)
                 write_video(stream)
                 #restart video
-                camera.stop_recording();
                 camera = picamera.PiCamera(resolution=(1280, 720), framerate=24)
                 stream = picamera.PiCameraCircularIO(camera, seconds=20)
                 camera.start_recording(stream, format='h264')
