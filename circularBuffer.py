@@ -12,7 +12,7 @@ writer = csv.writer(file)
 
 def write_now():
     # Randomly return True (like a fake motion detection routine)
-    return random.randint(0, 1000) == 0
+    return random.randint(0, 100) == 0
 
 def write_video(stream):
     print('Writing video!')
