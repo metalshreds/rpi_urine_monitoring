@@ -18,7 +18,7 @@ def write_video(stream):
                 stream.seek(frame.position)
                 break
         # Write the rest of the stream to disk
-        file_name = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+        file_name = strftime("%Y-%m-%d %H:%M:%S", gmtime()) + ".h264"
         with io.open(file_name, 'wb') as output:
             output.write(stream.read())
 
