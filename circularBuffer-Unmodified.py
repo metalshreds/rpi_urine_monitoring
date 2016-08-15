@@ -1,6 +1,9 @@
 import io
 import random
 import picamera
+import datetime as dt
+from time import gmtime, strftime
+
 
 def write_now():
     # Randomly return True (like a fake motion detection routine)
@@ -15,7 +18,8 @@ def write_video(stream):
                 stream.seek(frame.position)
                 break
         # Write the rest of the stream to disk
-        with io.open('motion.h264', 'wb') as output:
+        file_name = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+        with io.open(file_name, 'wb') as output:
             output.write(stream.read())
 
 with picamera.PiCamera() as camera:
