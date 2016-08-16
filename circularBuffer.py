@@ -26,7 +26,8 @@ def write_video(stream):
         file_name = strftime("%Y-%m-%d %H:%M:%S", gmtime())
         fileName = file_name + '.h264'
         with io.open(fileName, 'wb') as output:
-            output.write(stream.read())
+            #output.write(stream.read())
+            stream.copy_to(fileName, seconds = 30)
     print('Done Writing Video!')
 
 def write_file(timestamp):
