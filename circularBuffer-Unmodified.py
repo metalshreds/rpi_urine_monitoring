@@ -23,7 +23,7 @@ try:
             # stream to disk
             camera.wait_recording(10)
             file_name = strftime("%Y-%m-%d %H:%M:%S", gmtime()) + ".h264"
-            stream.copy_to(file_name)
+            stream.copy_to(file_name, seconds=30)
             print('done writing file')
 finally:
     camera.stop_recording()
