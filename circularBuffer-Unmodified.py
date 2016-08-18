@@ -42,7 +42,7 @@ camera.start_recording(stream, format='h264')
 try:
     while True:
         print('waiting')
-        camera.wait_recording(1)
+        camera.wait_recording(0.2)
         video_timestamp(camera)
         if event_detected():
             print('event detected')
