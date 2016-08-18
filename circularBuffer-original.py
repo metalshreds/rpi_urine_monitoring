@@ -20,8 +20,8 @@ try:
             # stream to disk
             camera.wait_recording(10)
             start = dt.datetime.now()
-            file_name = start.strftime("%Y-%m-%d %H:%M:%S") + ".h264"
-            stream.copy_to(file_name, seconds=30)
+            # file_name = start.strftime("%Y-%m-%d %H:%M:%S") + ".h264"
+            stream.copy_to('video.h264', seconds=30)
             print('finished saving')
 finally:
     camera.stop_recording()
