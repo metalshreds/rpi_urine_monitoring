@@ -7,8 +7,8 @@ import csv
 # from mettler_toledo_device import MettlerToledoDevice
 
 
-saveFile = open('timedata.csv','aw')
-writer = csv.writer(file)
+saveFile = open('timedata.csv', 'aw')
+writer = csv.writer(saveFile)
 
 
 def event_detected():
