@@ -47,7 +47,7 @@ try:
                 writer.writerow([timestamp, event_detected()])
             # Write video to file
             # file_name = strftime("%Y-%m-%d %H:%M:%S", gmtime()) + ".h264"
-            file_name = start + ".h264"
+            file_name = strftime("%Y-%m-%d %H:%M:%S", start) + ".h264"
             stream.copy_to(file_name, seconds=30)
             print('done writing file')
 finally:
