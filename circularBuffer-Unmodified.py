@@ -12,8 +12,6 @@ writer = csv.writer(saveFile)
 
 
 def event_detected():
-
-
     # Randomly return True (like a fake motion detection routine)
     return random.randint(0, 10) == 0
 
@@ -45,8 +43,9 @@ try:
     while True:
         print('waiting')
         camera.wait_recording(1)
+        video_timestamp(camera)
         if event_detected():
-            print('motion detected')
+            print('event detected')
             # Keep recording for 10 seconds and only then write the
             # stream to disk
             #camera.wait_recording(10)
