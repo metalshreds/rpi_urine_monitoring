@@ -16,12 +16,6 @@ def event_detected():
     return random.randint(0, 10) == 0
 
 
-def write_video(stream):
-    file_name = strftime("%Y-%m-%d %H:%M:%S", gmtime()) + ".h264"
-    stream.copy_to(file_name, seconds=30)
-    print('done writing file')
-
-
 # Main #
 camera = picamera.PiCamera()
 stream = picamera.PiCameraCircularIO(camera, seconds=20)
@@ -51,7 +45,11 @@ try:
                 camera.annotate_text = timestamp
                 # Write File
                 writer.writerow([timestamp, event_detected()])
-            write_video(stream)
+            # Write video to file
+            # file_name = strftime("%Y-%m-%d %H:%M:%S", gmtime()) + ".h264"
+            file_name = start + ".h264"
+            stream.copy_to(file_name, seconds=30)
+            print('done writing file')
 finally:
     camera.stop_recording()
     saveFile.close()
