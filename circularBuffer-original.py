@@ -1,6 +1,7 @@
 import io
 import random
 import picamera
+import datetime as dt
 
 
 def motion_detected():
@@ -18,7 +19,9 @@ try:
             # Keep recording for 10 seconds and only then write the
             # stream to disk
             camera.wait_recording(10)
-            stream.copy_to('motion.h264')
+            start = dt.datetime.now()
+            file_name = start.strftime("%Y-%m-%d %H:%M:%S") + ".h264"
+            stream.copy_to(file_name, seconds=30)
             print('finished saving')
 finally:
     camera.stop_recording()
