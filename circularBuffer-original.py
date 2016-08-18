@@ -14,9 +14,11 @@ try:
     while True:
         camera.wait_recording(1)
         if motion_detected():
+            print('motion detected')
             # Keep recording for 10 seconds and only then write the
             # stream to disk
             camera.wait_recording(10)
             stream.copy_to('motion.h264')
+            print('finished saving')
 finally:
     camera.stop_recording()
