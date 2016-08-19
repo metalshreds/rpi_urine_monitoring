@@ -47,7 +47,7 @@ try:
                 writer.writerow([timestamp, event_detected()])
             # Write video to file
             file_name = start.strftime("%Y-%m-%d %H:%M:%S") + ".h264"
-            stream.copy_to('video.h264', seconds=30)
+            stream.copy_to(file_name, seconds=30)
             print('done writing file')
 finally:
     camera.stop_recording()
