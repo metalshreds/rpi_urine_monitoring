@@ -14,7 +14,6 @@ saveFile = open('timedata.csv', 'aw')
 writer = csv.writer(saveFile)
 
 
-
 def event_detected(currWeight):
 
     # 5mg change in weight
