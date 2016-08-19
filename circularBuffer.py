@@ -28,15 +28,6 @@ def event_detected(currWeight):
        return True
     currWeight = weight
 
-
-
-
-
-
-
-
-
-
     # Randomly return True (like a fake motion detection routine)
     return random.randint(0, 10) == 0
 
