@@ -14,23 +14,6 @@ saveFile = open('timedata.csv', 'aw')
 writer = csv.writer(saveFile)
 
 
-def event_detected(currWeight):
-
-    # 5mg change in weight
-    # 5ml in volume
-
-    # [-0.6800, 'g', 'S'] #if weight is stable
-    weight, units, stability = dev.get_weight()
-
-    if weight-currWeight >= 0.005:
-       currWeight = weight
-       return True
-    currWeight = weight
-
-    # Randomly return True (like a fake motion detection routine)
-    return random.randint(0, 10) == 0
-
-
 # Main #
 # get current weight
 currWeight, units, stability = dev.get_weight()
