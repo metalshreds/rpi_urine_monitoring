@@ -16,7 +16,8 @@ writer = csv.writer(saveFile)
 
 # Main #
 # get current weight
-currWeight, units, stability = dev.get_weight()
+weight, units, stability = dev.get_weight()
+currWeight = weight
 # start picamera
 camera = picamera.PiCamera()
 stream = picamera.PiCameraCircularIO(camera, seconds=20)
