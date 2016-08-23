@@ -39,7 +39,7 @@ try:
 
         if weight-currWeight >= 0.005:
             print('event detected')
-            print("weight: " + weight)
+            print(weight)
             # Keep recording for 10 seconds and only then write the
             # stream to disk
             # camera.wait_recording(10)
