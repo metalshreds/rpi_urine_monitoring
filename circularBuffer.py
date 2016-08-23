@@ -27,7 +27,7 @@ try:
     while True:
         print('waiting')
         # # Annotate camera
-        timestamp = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        timestamp = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
         camera.annotate_background = picamera.Color('black')
         camera.annotate_text = timestamp
         # Write File
@@ -46,14 +46,14 @@ try:
             start = dt.datetime.now()
             while (dt.datetime.now() - start).seconds < 10:
                 # # Annotate camera
-                timestamp = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                timestamp = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
                 camera.annotate_background = picamera.Color('black')
                 camera.annotate_text = timestamp
                 # Write File
                 weight, units, stability = dev.get_weight()  # get the current weight
                 writer.writerow([timestamp, weight])
             # Write video to file
-            file_name = start.strftime("%Y-%m-%d %H:%M:%S") + ".h264"
+            file_name = start.strftime("%Y-%m-%d %H:%M:%S.%f") + ".h264"
             stream.copy_to(file_name, seconds=30)
             print('done writing file')
         currWeight = weight             # weight updated but no event occurring
