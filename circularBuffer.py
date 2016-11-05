@@ -13,7 +13,6 @@ dev = MettlerToledoDevice(port='/dev/ttyACM0') # Linux specific port
 saveFile = open('timedata.csv', 'aw')
 writer = csv.writer(saveFile)
 
-
 # Main #
 # get current weight
 print('program started')
@@ -54,7 +53,8 @@ try:
                 writer.writerow([timestamp, weight])
             # Write video to file
             file_name = start.strftime("%Y-%m-%d %H:%M:%S.%f") + ".h264"
-            stream.copy_to(file_name, seconds=30)
+            #stream.copy_to(file_name, seconds=30)
+            stream.copy_to('motion.h264')
             print('done writing file')
         currWeight = weight             # weight updated but no event occurring
 finally:
