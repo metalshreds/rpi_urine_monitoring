@@ -8,8 +8,8 @@ From link below do the following:
 ```shell
 Dont install homebrew OR python -- macOS 10.11 already has python in it
 sudo easy_install pip
-sudo easy_install virtualenvs
-sudo easy_install ipython
+sudo pip install virtualenv
+sudo pip install ipython
 sudo pip install pyserial
 ```
 
