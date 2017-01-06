@@ -16,6 +16,7 @@ saveFile = open(filename, 'w')
 #saveFile = open('timedata.csv', 'aw')
 writer = csv.writer(saveFile)
 
+#Added comment
 
 # Main #
 # get current weight
