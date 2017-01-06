@@ -16,7 +16,7 @@ saveFile = open(filename, 'w')
 #saveFile = open('timedata.csv', 'aw')
 writer = csv.writer(saveFile)
 
-#Added comment
+timestamp = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
 
 # Main #
 # get current weight
@@ -60,10 +60,10 @@ try:
                 weight, units, stability = dev.get_weight()  # get the current weight
                 writer.writerow([timestamp, weight])
             # Write video to file
-            file_name = start.strftime("%Y-%m-%d %H:%M:%S.%f") + ".h264"
-           # file_name = "video"
-        stream.copy_to(file_name)
-        print('done writing file')
+            file_name = start.strftime("%Y-%m-%d hr%H_min%M_s%S") + ".h264"
+            # file_name = "video"
+            stream.copy_to(file_name)
+            print('done writing file')
         currWeight = weight             # weight updated but no event occurring
 finally:
     camera.stop_preview()
