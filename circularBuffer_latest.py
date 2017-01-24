@@ -24,7 +24,8 @@ print('Mettler Toledo Video/Weight Logger Program Started')
 weight, units, stability = dev.get_weight()
 currWeight = weight
 # start picamera
-camera = picamera.PiCamera(sensor_mode=2)
+#camera = picamera.PiCamera(sensor_mode=2)
+camera = picamera(resolution=(3280, 2464), framerate=15, sensor_mode=2)
 camera.start_preview()
 camera.vflip = True
 stream = picamera.PiCameraCircularIO(camera, seconds=10)
