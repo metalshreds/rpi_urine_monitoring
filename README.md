@@ -8,7 +8,7 @@ Logging and reviewing mice data and videos can be time consuming and tedious. Th
   * Mice cage suspended above mettler toledo scale with mesh floor
   * Plastic enclosure surrounding system to prevent air flow from triggering recording event.
   
-## Installation for Mac
+## Installation for Raspberry Pi or macOS
 From link below do the following:
 [Setup Python](https://github.com/janelia-pypi/python_setup)
 ```shell
