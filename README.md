@@ -26,6 +26,8 @@ mkdir -p ~/virtualenvs/mettler_toledo_device
 virtualenv ~/virtualenvs/mettler_toledo_device
 source ~/virtualenvs/mettler_toledo_device/bin/activate
 pip install mettler_toledo_device  ## Be sure this installs successfully
+Open a new terminal and run the command again
+pip install mettler_toledo_device  ## Be sure this installs successfully
 ```
 
 /Library/Python/2.7/site-packages/serial-device2
