@@ -29,7 +29,7 @@ sudo apt-get update || echo -e "\e[91mUpdate failed, carrying on installation ..
 
 # Installing helper tools
 echo -e "\e[96mInstalling helper tools ...\e[90m"
-sudo pip install ipython pyserial || exit
+sudo pip install ipython pyserial mettler_toledo_device || exit
 
 # Download Rpi Urine Monitor script, and check if it has already been downloaded
 cd ~ || exit #if cant change directory something is quite wrong...
@@ -56,7 +56,7 @@ echo " "
 echo -e "The Rpi Urine Monitor script and dependencies have been successfully installed!"
 echo -e "Navigate to the script directory \e[97m~/rpi_urine_monitor\e[92m and run the script:"
 echo -e "\e[1m\e[97mpython circularBuffer_latest.py\e[92m to run on this raspberry pi"
-echo -e "Otherwise see other intructios to run remotely through PuTTY"
+echo -e "Otherwise see other intructions on the website to run remotely through PuTTY"
 echo " "
 echo " "
 echo -e "\e[0m"
