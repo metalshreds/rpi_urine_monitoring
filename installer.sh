@@ -29,7 +29,7 @@ sudo apt-get update || echo -e "\e[91mUpdate failed, carrying on installation ..
 
 # Installing helper tools
 echo -e "\e[96mInstalling helper tools ...\e[90m"
-sudo pip --assume-yes install ipython pyserial || exit
+sudo pip install ipython pyserial || exit
 
 # Download Rpi Urine Monitor script, and check if it has already been downloaded
 cd ~ || exit #if cant change directory something is quite wrong...
@@ -50,13 +50,13 @@ else
 	exit;
 fi
 
-echo "\e[92m"
+echo -e "\e[92m"
 echo " "
 # echo -e "\e[92mWe're ready! Run \e[1m\e[97mDISPLAY=:0 npm start\e[0m\e[92m from the ~/MagicMirror directory to start your MagicMirror.\e[0m"
-echo "The Rpi Urine Monitor script and dependencies have been successfully installed!"
-echo "Navigate to the script directory \e[97m~/rpi_urine_monitor\e[92m and run the script:"
-echo "\e[1m\e[97mpython circularBuffer_latest.py\e[92m to run on this raspberry pi"
-echo "Otherwise see other intructios to run remotely through PuTTY"
+echo -e "The Rpi Urine Monitor script and dependencies have been successfully installed!"
+echo -e "Navigate to the script directory \e[97m~/rpi_urine_monitor\e[92m and run the script:"
+echo -e "\e[1m\e[97mpython circularBuffer_latest.py\e[92m to run on this raspberry pi"
+echo -e "Otherwise see other intructios to run remotely through PuTTY"
 echo " "
 echo " "
-echo "\e[0m"
+echo -e "\e[0m"
